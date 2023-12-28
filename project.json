@@ -1,5 +1,5 @@
 {
-  "name": "Traveloka_DataAutomation_Dispatcher_Email",
+  "name": "Traveloka_DataAutomation_Dispatcher_Email_S3",
   "projectId": "1164334a-ceaf-4f10-ae95-3b39107edbbe",
   "description": "Blank Process",
   "main": "Main.xaml",
@@ -45,7 +45,6 @@
       "ignoredFiles": []
     },
     "fileInfoCollection": [],
-    "modernBehavior": true,
     "saveToCloud": false
   },
   "expressionLanguage": "VisualBasic",
