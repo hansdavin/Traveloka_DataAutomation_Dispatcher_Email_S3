@@ -93,34 +93,8 @@
       <Assign.Value>
         <InArgument x:TypeArguments="scg:List(x:String)" xml:space="preserve">[New List(Of String) From 
 {
-	"xenditmandiri",
-	"2c2p_onetwothree",
-	"indomaret(paymentpoint)",
-	"directdebitbca",
-	"alfamart",
-	"bcaklikpay",
-	"cimbclicks",
-	"coins",
-	"cybersourcebni",
-	"mdrvn-vpnganluong",
-    "mdruob",
-    "mdrbukopin",
-    "mdrcimbniaga",
-    "mdrcitibank",
-    "mdrdanamon",
-    "mdrdbs",
-    "mdrhsbc",
-    "mdrjeniusbtpn",
-    "mdrktc(thai)",
-    "mdrmandiri",
-    "mdrmayapada",
-    "mdrmaybank",
-    "mdrmega",
-    "mdrocbcnisp",
-    "mdrpanin",
-    "mdrpermata",
-    "mdrsinarmas",
-    "mdrstandardchartered(scb)"
+	"voyzantllcus",
+	"voyzantllcca"
 }]</InArgument>
       </Assign.Value>
     </Assign>
@@ -140,7 +114,12 @@
               <ui:InvokeWorkflowFile.Arguments>
                 <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorQueueName" />
                 <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorQueueFolder" />
-                <InArgument x:TypeArguments="x:String" x:Key="in_BPKey">[bp]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_BPKey">
+                  <VisualBasicValue x:TypeArguments="x:String" ExpressionText="bp" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_ProductType">
+                  <Literal x:TypeArguments="x:String">Transport</Literal>
+                </InArgument>
               </ui:InvokeWorkflowFile.Arguments>
             </ui:InvokeWorkflowFile>
           </Sequence>
