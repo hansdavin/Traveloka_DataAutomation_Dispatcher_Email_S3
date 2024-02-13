@@ -153,13 +153,13 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Init" sap:VirtualizedContainerService.HintSize="706,790" sap2010:WorkflowViewState.IdRef="Sequence_13">
+          <Sequence DisplayName="INIT HERE PLEASE" sap:VirtualizedContainerService.HintSize="706,790" sap2010:WorkflowViewState.IdRef="Sequence_13">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Assign DisplayName="LIST BP PLS" sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_8">
+            <Assign DisplayName="List BPs" sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_8">
               <Assign.To>
                 <OutArgument x:TypeArguments="scg:List(x:String)">[listBP]</OutArgument>
               </Assign.To>
@@ -170,7 +170,7 @@
 }]</InArgument>
               </Assign.Value>
             </Assign>
-            <ui:MultipleAssign DisplayName="Please set Product Type here" sap:VirtualizedContainerService.HintSize="434,194" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+            <ui:MultipleAssign DisplayName="Set necessary config" sap:VirtualizedContainerService.HintSize="434,194" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
               <ui:MultipleAssign.AssignOperations>
                 <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
