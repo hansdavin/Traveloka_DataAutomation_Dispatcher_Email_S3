@@ -1,4 +1,15 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="MultipleBP" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1173,2894" sap2010:WorkflowViewState.IdRef="MultipleBP_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ug="clr-namespace:UiPath.GSuite;assembly=UiPath.GSuite" xmlns:uga="clr-namespace:UiPath.GSuite.Activities;assembly=UiPath.GSuite.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="MultipleBP" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ug="clr-namespace:UiPath.GSuite;assembly=UiPath.GSuite" xmlns:uga="clr-namespace:UiPath.GSuite.Activities;assembly=UiPath.GSuite.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_dateStart" Type="InArgument(x:String)" />
+    <x:Property Name="in_dateEnd" Type="InArgument(x:String)" />
+    <x:Property Name="in_listBpKey" Type="InArgument(x:String)" />
+    <x:Property Name="in_productType" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1234,2926</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>MultipleBP_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -39,6 +50,7 @@
       <x:String>UiPath.GSuite.Activities.Contracts</x:String>
       <x:String>UiPath.Shared.Activities.ConnectionService.Contracts</x:String>
       <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -101,9 +113,10 @@
       <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="For multiple dates rerun" sap:VirtualizedContainerService.HintSize="866,2829" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="For multiple dates rerun" sap:VirtualizedContainerService.HintSize="832,2861" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:List(s:DateTime)" Name="dateList" />
       <Variable x:TypeArguments="s:DateTime" Name="dateEnd" />
@@ -114,7 +127,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Set Date start end" sap:VirtualizedContainerService.HintSize="804,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+    <ui:MultipleAssign DisplayName="Set Date start end" sap:VirtualizedContainerService.HintSize="770,172" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
@@ -122,7 +135,7 @@
               <OutArgument x:TypeArguments="s:DateTime">[dateStart]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="s:DateTime">[CDate("01/11/2024")]</InArgument>
+              <InArgument x:TypeArguments="s:DateTime">[CDate(in_dateStart)]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
@@ -130,17 +143,17 @@
               <OutArgument x:TypeArguments="s:DateTime">[dateEnd]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="s:DateTime">[CDate("01/14/2024")]</InArgument>
+              <InArgument x:TypeArguments="s:DateTime">[CDate(in_dateEnd)]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <ui:InterruptibleWhile CurrentIndex="{x:Null}" DisplayName="While" sap:VirtualizedContainerService.HintSize="804,2546" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
+    <ui:InterruptibleWhile CurrentIndex="{x:Null}" Condition="[dateStart&lt;=dateEnd]" DisplayName="While" sap:VirtualizedContainerService.HintSize="770,2601" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
       <ui:InterruptibleWhile.Body>
-        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="768,2380" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="734,2412" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <Sequence.Variables>
-            <Variable x:TypeArguments="scg:List(x:String)" Name="listBP" />
+            <Variable x:TypeArguments="s:String[]" Name="listBP" />
             <Variable x:TypeArguments="x:String" Name="productType" />
             <Variable x:TypeArguments="x:String" Name="SAKey" />
             <Variable x:TypeArguments="x:String" Name="strSheetIdName" />
@@ -153,24 +166,21 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="INIT HERE PLEASE" sap:VirtualizedContainerService.HintSize="706,790" sap2010:WorkflowViewState.IdRef="Sequence_13">
+          <Sequence DisplayName="INIT HERE PLEASE" sap:VirtualizedContainerService.HintSize="672,871" sap2010:WorkflowViewState.IdRef="Sequence_13">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Assign DisplayName="List BPs" sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_8">
+            <Assign DisplayName="List BPs" sap:VirtualizedContainerService.HintSize="434,122" sap2010:WorkflowViewState.IdRef="Assign_8">
               <Assign.To>
-                <OutArgument x:TypeArguments="scg:List(x:String)">[listBP]</OutArgument>
+                <OutArgument x:TypeArguments="s:String[]">[listBP]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="scg:List(x:String)" xml:space="preserve">[New List(Of String) From 
-{
-	"pkfarehklimited"
-}]</InArgument>
+                <InArgument x:TypeArguments="s:String[]">[in_listBpKey.Split(",")]</InArgument>
               </Assign.Value>
             </Assign>
-            <ui:MultipleAssign DisplayName="Set necessary config" sap:VirtualizedContainerService.HintSize="434,194" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+            <ui:MultipleAssign sap2010:Annotation.AnnotationText="dont forget to change strSheetId if want to run from local&#xD;&#xA;" DisplayName="Set necessary config" sap:VirtualizedContainerService.HintSize="434,276" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
               <ui:MultipleAssign.AssignOperations>
                 <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -178,7 +188,7 @@
                       <OutArgument x:TypeArguments="x:String">[productType]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">Transport</InArgument>
+                      <InArgument x:TypeArguments="x:String">[in_productType]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
@@ -186,7 +196,7 @@
                       <OutArgument x:TypeArguments="x:String">[strSheetIdName]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[String.Format("[Dev] RPA_Moon_SheetIdConfig_{0}", productType)]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[String.Format("RPA_Moon_SheetIdConfig_{0}", productType)]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
@@ -207,45 +217,50 @@
                   </ui:AssignOperation>
                 </scg:List>
               </ui:MultipleAssign.AssignOperations>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
             </ui:MultipleAssign>
-            <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="[Dev] RPA_Moon_PathSaKey" CacheStrategy="None" DisplayName="Get SA Key" sap:VirtualizedContainerService.HintSize="434,141" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+            <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="[Dev] RPA_Moon_PathSaKey" CacheStrategy="None" DisplayName="Get SA Key" sap:VirtualizedContainerService.HintSize="434,181" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
               <ui:GetRobotAsset.Value>
                 <OutArgument x:TypeArguments="x:String">[SAKey]</OutArgument>
               </ui:GetRobotAsset.Value>
             </ui:GetRobotAsset>
-            <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="[strSheetIdName]" CacheStrategy="None" DisplayName="Get Sheet Id Config" sap:VirtualizedContainerService.HintSize="434,141" sap2010:WorkflowViewState.IdRef="GetRobotAsset_2">
+            <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="[strSheetIdName]" CacheStrategy="None" DisplayName="Get Sheet Id Config" sap:VirtualizedContainerService.HintSize="434,164" sap2010:WorkflowViewState.IdRef="GetRobotAsset_2">
               <ui:GetRobotAsset.Value>
                 <OutArgument x:TypeArguments="x:String">[sheetID]</OutArgument>
               </ui:GetRobotAsset.Value>
             </ui:GetRobotAsset>
           </Sequence>
-          <Sequence DisplayName="Start bp loop" sap:VirtualizedContainerService.HintSize="706,1317" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <Sequence DisplayName="Start bp loop" sap:VirtualizedContainerService.HintSize="672,1351" sap2010:WorkflowViewState.IdRef="Sequence_6">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="644,1206" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[listBP]">
+            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="610,1223" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[listBP]">
               <ui:ForEach.Body>
                 <ActivityAction x:TypeArguments="x:String">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="x:String" Name="bp" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="608,1082" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="574,1076" sap2010:WorkflowViewState.IdRef="Sequence_4">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Sequence DisplayName="Write dates and rerun status" sap:VirtualizedContainerService.HintSize="546,818" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                    <Sequence DisplayName="Write dates and rerun status" sap:VirtualizedContainerService.HintSize="512,855" sap2010:WorkflowViewState.IdRef="Sequence_5">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <uga:GSuiteApplicationScope Account="{x:Null}" ApiKey="{x:Null}" ContinueOnError="{x:Null}" CredentialID="{x:Null}" CredentialSecret="{x:Null}" Folder="{x:Null}" Password="{x:Null}" SecureCredentialSecret="{x:Null}" ServiceAccountEmail="{x:Null}" TimeoutMS="{x:Null}" UserEmail="{x:Null}" AuthenticationType="ServiceAccountKey" DataStoreLocation="Local disk" DisplayName="GSuite Application Scope Use SAKey" HasDomainWideAccesss="False" sap:VirtualizedContainerService.HintSize="484,707" sap2010:WorkflowViewState.IdRef="GSuiteApplicationScope_1" KeyPath="[SAKey]" KeyType="JSON" OAuthClient="UiPath" Services="Unselected">
+                      <uga:GSuiteApplicationScope Account="{x:Null}" ApiKey="{x:Null}" ContinueOnError="{x:Null}" CredentialID="{x:Null}" CredentialSecret="{x:Null}" Folder="{x:Null}" Password="{x:Null}" SecureCredentialSecret="{x:Null}" ServiceAccountEmail="{x:Null}" TimeoutMS="{x:Null}" UserEmail="{x:Null}" AuthenticationType="ServiceAccountKey" DataStoreLocation="Local disk" DisplayName="GSuite Application Scope Use SAKey" HasDomainWideAccesss="False" sap:VirtualizedContainerService.HintSize="450,727" sap2010:WorkflowViewState.IdRef="GSuiteApplicationScope_1" KeyPath="[SAKey]" KeyType="JSON" OAuthClient="UiPath" Services="Unselected">
                         <uga:GSuiteApplicationScope.AuthenticationScopes>
                           <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
                             <InArgument x:TypeArguments="x:String">https://www.googleapis.com/auth/spreadsheets</InArgument>
@@ -256,7 +271,7 @@
                             <ActivityAction.Argument>
                               <DelegateInArgument x:TypeArguments="ug:SimpleObjectContainer" Name="GSuiteScope" />
                             </ActivityAction.Argument>
-                            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,595" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="416,592" sap2010:WorkflowViewState.IdRef="Sequence_7">
                               <Sequence.Variables>
                                 <Variable x:TypeArguments="sd:DataTable" Name="dtUserConfig" />
                               </Sequence.Variables>
@@ -265,14 +280,14 @@
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <uga:WriteCell ContinueOnError="{x:Null}" GoogleSpreadsheet="{x:Null}" Request="{x:Null}" sap2010:Annotation.AnnotationText="Save after susccessfully add queue" AuthScopesInvalid="False" Cell="[cellRerun]" DisplayName="Write Cell Rerun to True" sap:VirtualizedContainerService.HintSize="388,222" sap2010:WorkflowViewState.IdRef="WriteCell_1" IsInsideBatchUpdateScope="False" SheetName="[String.Format(&quot;Config_{0}&quot;, bp)]" SpreadsheetId="[sheetID]" Value="TRUE">
+                              <uga:WriteCell ContinueOnError="{x:Null}" GoogleSpreadsheet="{x:Null}" Request="{x:Null}" sap2010:Annotation.AnnotationText="Save after susccessfully add queue" AuthScopesInvalid="False" Cell="[cellRerun]" DisplayName="Write Cell Rerun to True" sap:VirtualizedContainerService.HintSize="354,262" sap2010:WorkflowViewState.IdRef="WriteCell_1" IsInsideBatchUpdateScope="False" SheetName="[String.Format(&quot;Config_{0}&quot;, bp)]" SpreadsheetId="[sheetID]" Value="TRUE">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </uga:WriteCell>
-                              <uga:WriteCell ContinueOnError="{x:Null}" GoogleSpreadsheet="{x:Null}" Request="{x:Null}" sap2010:Annotation.AnnotationText="Save after susccessfully add queue" AuthScopesInvalid="False" Cell="[cellRerunDate]" DisplayName="Write Cell Rerun Date " sap:VirtualizedContainerService.HintSize="388,222" sap2010:WorkflowViewState.IdRef="WriteCell_2" IsInsideBatchUpdateScope="False" SheetName="[String.Format(&quot;Config_{0}&quot;, bp)]" SpreadsheetId="[sheetID]" Value="[dateStart.ToString(&quot;MM/dd/yyyy&quot;)]">
+                              <uga:WriteCell ContinueOnError="{x:Null}" GoogleSpreadsheet="{x:Null}" Request="{x:Null}" sap2010:Annotation.AnnotationText="Save after susccessfully add queue" AuthScopesInvalid="False" Cell="[cellRerunDate]" DisplayName="Write Cell Rerun Date " sap:VirtualizedContainerService.HintSize="354,245" sap2010:WorkflowViewState.IdRef="WriteCell_2" IsInsideBatchUpdateScope="False" SheetName="[String.Format(&quot;Config_{0}&quot;, bp)]" SpreadsheetId="[sheetID]" Value="[dateStart.ToString(&quot;MM/dd/yyyy&quot;)]">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -290,7 +305,7 @@
                         </sap:WorkflowViewStateService.ViewState>
                       </uga:GSuiteApplicationScope>
                     </Sequence>
-                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Main.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="546,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Main.xaml">
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Main.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="512,136" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Main.xaml">
                       <ui:InvokeWorkflowFile.Arguments>
                         <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorQueueName" />
                         <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorQueueFolder" />
@@ -303,7 +318,7 @@
               </ui:ForEach.Body>
             </ui:ForEach>
           </Sequence>
-          <Assign DisplayName="dateStart ++" sap:VirtualizedContainerService.HintSize="706,82" sap2010:WorkflowViewState.IdRef="Assign_3">
+          <Assign DisplayName="dateStart ++" sap:VirtualizedContainerService.HintSize="672,105" sap2010:WorkflowViewState.IdRef="Assign_3">
             <Assign.To>
               <OutArgument x:TypeArguments="s:DateTime">[dateStart]</OutArgument>
             </Assign.To>
@@ -313,9 +328,6 @@
           </Assign>
         </Sequence>
       </ui:InterruptibleWhile.Body>
-      <ui:InterruptibleWhile.Condition>
-        <VisualBasicValue x:TypeArguments="x:Boolean" DisplayName="Visual basic value" ExpressionText="dateStart&lt;=dateEnd" />
-      </ui:InterruptibleWhile.Condition>
     </ui:InterruptibleWhile>
   </Sequence>
 </Activity>
